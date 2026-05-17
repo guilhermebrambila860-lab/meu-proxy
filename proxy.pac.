@@ -1,0 +1,13 @@
+function FindProxyForURL(url, host) {
+    if (shExpMatch(url, "*/GetBackpack") || 
+        shExpMatch(url, "*/ABHotUpdates/*") || 
+        shExpMatch(url, "*/CheckHackBehavior") || 
+        shExpMatch(url, "*/GetMatchmakingBlacklist")) {
+        
+        // Redireciona essas URLs específicas para um endereço nulo ou local
+        return "PROXY 127.0.0.1:8080"; 
+    }
+    
+    // Todo o resto da internet passa direto pelo Wi-Fi normal
+    return "DIRECT";
+}
