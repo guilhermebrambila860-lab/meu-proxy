@@ -1,5 +1,11 @@
-function FindProxyForURL(url, host) {
-    if (shExpMatch(url, "*/GetBackpack") || 
-        shExpMatch(url, "*/ABHotUpdates/*") || 
-        shExpMatch(url, "*/CheckHackBehavior") || 
-        shExpMatch(url, "*/GetMatchmakingBlacklist")) {
+{
+  "enabled": true,
+  "name": "LYXRO PROXY BODY V4",
+  "url": [
+    "*/GetBackpack",
+    "*/ABHotUpdates/*",
+    "*/CheckHackBehavior",
+    "*/GetMatchmakingBlacklist"
+  ],
+  "script": "var obj=JSON.parse($response.body);if($request.url.indexOf(\"GetBackpack\")!=-1){if(obj.data&&obj.data.backpack_list){obj.data.backpack_list.forEach(item=>{item.is_lock=false;if(item.components){item.components.forEach(comp=>{if(comp.component_id===1014)comp.int_value=1;});}})}}else if($request.url.indexOf(\"ABHotUpdates\")!=-1){if(obj.data&&obj.data.ab_config){obj.data.ab_config.anti_cheat_version=0;obj.data.ab_config.enable_anti_cheat=false;}}else if($request.url.indexOf(\"CheckHackBehavior\")!=-1||$request.url.indexOf(\"GetMatchmakingBlacklist\")!=-1){obj={code:0,message:\"Success\",data:{}}};$done({body:JSON.stringify(obj)});"
+}
